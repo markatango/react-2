@@ -15,16 +15,17 @@ class ShopPage extends React.Component {
 // destructuring this.state
 // use of ... to destructure all the other properties
     render() {
-       const {collections} = this.state;
-       return 
-       <div>
-           {
-               collections.map(({id, ...otherCollectionProps}) => (
-                   <CollectionPreview key={id} {...otherCollectionProps} />
-               )) 
-           }
-       </div>
+       const { collections } = this.state;
+       return ( 
+            <div>
+                {
+                    collections.map(({id, ...otherCollectionProps}) => (
+                        <CollectionPreview key={id} {...otherCollectionProps} />
+                    ))
+                }
+            </div>
+        )
     }
-}
+};
 
 export default ShopPage;
