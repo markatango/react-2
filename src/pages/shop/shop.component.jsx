@@ -10,14 +10,14 @@ class ShopPage extends React.Component {
 
         this.state = {
             collections : SHOP_DATA
-        }
+        } 
     }
 // destructuring this.state
 // use of ... to destructure all the other properties
     render() {
        const { collections } = this.state;
        return ( 
-            <div>
+            <div className='shop-page'>
                 {
                     collections.map(({id, ...otherCollectionProps}) => (
                         <CollectionPreview key={id} {...otherCollectionProps} />
