@@ -11,6 +11,12 @@
     padding: 25px;
   }
 
+  .welcome-container {
+    height: 100%;
+    width: auto;
+    padding: 25px;
+  }
+
   .options {
     width: 50%;
     height: 100%;
@@ -20,6 +26,7 @@
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
     }
   }
 }
