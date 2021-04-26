@@ -7,25 +7,39 @@ import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Contacts from './pages/contacts/contacts.component';
 //import RouteDemo from './pages/routedemo/routedemo.component';
-import { auth } from './firebase/firebase.utils.js';
+import { auth, createUsersProfileDocument } from './firebase/firebase.utils.js';
 
 class App extends React.Component {
   constructor(){
     super();
-
     this.state = {
       currentUser: null
     }
   }
   unsubscribeFromAuth = null
 
-
  //confirm authentication through 'open subscription' service from firebase
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({ currentUser: user });
-      console.log(user);
-    })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      console.log("userAuth", userAuth)
+      if(userAuth) {
+        const userRef = await createUsersProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          console.log("snapShot: ",snapShot);
+          console.log("id: ", snapShot.id);
+          console.log("exists: ", snapShot.exists);
+          console.log("data: ", snapShot.data());
+      
+          // set state is asynchronous so the console.log has to be the callback fn
+          this.setState({
+            currentUser: {id: snapShot.id, ...snapShot.data() }
+            }, 
+            ()=>{ console.log("state: ",this.state);  }
+          );
+        });
+    }
+    this.setState({currentUser: userAuth});
+  })
   }
 
   componentWillUnmount(){

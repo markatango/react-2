@@ -11,7 +11,7 @@ const Header = ({ currentUser }) => (
         </Link>
         {
             currentUser ? (
-                <div className='welcome-container'>`Welcome, {currentUser.displayName.split(" ")[0]}!`</div>
+                <div className='welcome-container'>Welcome, {currentUser.displayName.split(" ")[0]}!</div>
             ) : (
                 null
             )
@@ -29,8 +29,8 @@ const Header = ({ currentUser }) => (
                 currentUser ?
                 (<Redirect to="/" />)
                 : null
-                
             }
+            
         </div>
     </div>
 )
