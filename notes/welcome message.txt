@@ -1,0 +1,8 @@
+//WelcomeMessage
+{
+    currentUser ? (
+        <div className='welcome-container'>Welcome, {currentUser.displayName.split(" ")[0]}!</div>
+    ) : (
+        null
+    )
+}

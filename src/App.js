@@ -24,12 +24,8 @@ class App extends React.Component {
       console.log("userAuth", userAuth)
       if(userAuth) {
         const userRef = await createUsersProfileDocument(userAuth);
+        
         userRef.onSnapshot(snapShot => {
-          console.log("snapShot: ",snapShot);
-          console.log("id: ", snapShot.id);
-          console.log("exists: ", snapShot.exists);
-          console.log("data: ", snapShot.data());
-      
           // set state is asynchronous so the console.log has to be the callback fn
           this.setState({
             currentUser: {id: snapShot.id, ...snapShot.data() }
@@ -37,9 +33,9 @@ class App extends React.Component {
             ()=>{ console.log("state: ",this.state);  }
           );
         });
-    }
-    this.setState({currentUser: userAuth});
-  })
+      }
+      this.setState({currentUser: userAuth});
+    });
   }
 
   componentWillUnmount(){

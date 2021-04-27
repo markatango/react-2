@@ -9,13 +9,7 @@ const Header = ({ currentUser }) => (
         <Link className='logo-container' to="/">
             <Logo className='logo'/>
         </Link>
-        {
-            currentUser ? (
-                <div className='welcome-container'>Welcome, {currentUser.displayName.split(" ")[0]}!</div>
-            ) : (
-                null
-            )
-        }
+        
         <div className='options'>
             <Link className='option' to="/shop">Shop</Link>
             <Link className='option' to='/contacts'>Contacts</Link>
