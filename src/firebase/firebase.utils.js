@@ -1,18 +1,8 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-//import { useRouteMatch } from 'react-router';
 
-// TO DO: somehow get process.env to work and save these keys.
-const config = {
-    apiKey: "AIzaSyDtX5YGj0dXXJjEvwgAYFIA6zX7LT47G2I",
-    authDomain: "node-react-dev-308922.firebaseapp.com",
-    projectId: "node-react-dev-308922",
-    storageBucket: "node-react-dev-308922.appspot.com",
-    messagingSenderId: 1034650591530,
-    appId: "1:1034650591530:web:f6261d8f0f322c7c5a3e53",
-    measurementId: "G-9S0BB3BR5B"
-  };
+const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP_FIREBASE_MEASURE, REACT_APP_FIREBASE_APPID } = process.env;
 
 /* export const createUserProfileDocument = async (userAuth, additionalData) => {
   if(!userAuth) return;
@@ -20,17 +10,19 @@ const config = {
   }; */
 
 
-  /* const config = {
-    apiKey: process.env.FIREBASE_REACT_2_APIKEY,
+ const config = {
+    apiKey: REACT_APP_FIREBASE_APIKEY,
     authDomain: "node-react-dev-308922.firebaseapp.com",
     projectId: "node-react-dev-308922",
     storageBucket: "node-react-dev-308922.appspot.com",
-    messagingSenderId: process.env.FIREBASE_REACT_2_MESSAGESENDERID,
-    appId: process.env.FIREBASE_REACT_2_APPID,
-    measurementId: process.env.FIREBASE_REACT_2_MEASURE
-  }; */
+    messagingSenderId: REACT_APP_FIREBASE_MESSAGESENDERID,
+    appId: REACT_APP_FIREBASE_APPID,
+    measurementId: REACT_APP_FIREBASE_MEASURE
+  }; 
 
   firebase.initializeApp(config);
+
+  console.log({REACT_APP_FIREBASE_APIKEY});
 
   export const createUsersProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
