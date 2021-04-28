@@ -22,8 +22,6 @@ const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP
 
   firebase.initializeApp(config);
 
-  console.log({REACT_APP_FIREBASE_APIKEY});
-
   export const createUsersProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
