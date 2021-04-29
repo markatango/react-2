@@ -17,16 +17,14 @@ class App extends React.Component {
 
  //confirm authentication through 'open subscription' service from firebase
   componentDidMount() {
+    
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log("userAuth", userAuth)
       if(userAuth) {
-        
         const userRef = await createUsersProfileDocument(userAuth);
-        
         userRef.onSnapshot(snapShot => {
-        
           setCurrentUser({
             currentUser: {id: snapShot.id, ...snapShot.data() }
           });
