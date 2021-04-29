@@ -19,16 +19,14 @@ class App extends React.Component {
  // user action 'setCurrentUser' is dispatched from user.actions to props for this component
  // by the mapDispatchToProps function, below.
   componentDidMount() {
+    
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log("userAuth", userAuth)
       if(userAuth) {
-        
         const userRef = await createUsersProfileDocument(userAuth);
-        
         userRef.onSnapshot(snapShot => {
-        
           setCurrentUser({
             currentUser: {id: snapShot.id, ...snapShot.data() }
           });
