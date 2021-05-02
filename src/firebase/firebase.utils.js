@@ -4,12 +4,6 @@ import 'firebase/auth';
 
 const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP_FIREBASE_MEASURE, REACT_APP_FIREBASE_APPID } = process.env;
 
-/* export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if(!userAuth) return;
-  console.log(firestore.doc('users/aseriewkv'));
-  }; */
-
-
  const config = {
     apiKey: REACT_APP_FIREBASE_APIKEY,
     authDomain: "node-react-dev-308922.firebaseapp.com",
