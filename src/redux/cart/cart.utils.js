@@ -8,6 +8,16 @@ export const addItemsToCart = (cartItems, cartItemToAdd) => {
     //else:
     return [...cartItems, {...cartItemToAdd, quantity: 1}]
 };
+export const decItemsInCart = (cartItems, cartItemToAdd) => {
+    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
+    if(existingCartItem) {
+        return cartItems.map(cartItem =>
+            cartItem.id === cartItemToAdd.id ? { ...cartItem, quantity: (cartItem.quantity <= 0 ? 0 : cartItem.quantity - 1)} : cartItem
+            )
+    } 
+    //else:
+    return [...cartItems, {...cartItemToAdd, quantity: 1}]
+};
 
 export const delItemFromCart = (cartItems, cartItemToDel) => {
     const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToDel.id);
