@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import CustomButton from '../custom-button/custom-button.component';
 import CartItem from '../cart-item/cart-item.component';
 import { selectCartItems, selectCartItemsCount } from '../../redux/cart/cart.selectors';
+import { createStructuredSelector } from 'reselect';
+import { withRouter } from 'react-router-dom';
+import { toggleCartHidden } from '../../redux/cart/cart.actions';
+
 
 import './cart-dropdown.styles.scss';
 
@@ -15,20 +19,26 @@ class CartDropDown extends React.Component {
     }
 
     render() {
+            console.log(this.props);
         return(
             <div className='cart-dropdown'>
                 <div className='cart-items' />
                 {
-                    this.props.cartItems.map(cartItem => (
-                        <div>
-
-                    <CartItem key={cartItem.id} item={cartItem} />
-                    
-                    </div>
-                    ))
+                    this.props.cartItems.length ? 
+                    this.props.cartItems.map(cartItem => (  
+                        <CartItem key={cartItem.id} item={cartItem} />
+                    )) :
+                    <span className='empty-message'>Cart is empty</span>
                 }
                 <span>{`Total item count: ${ this.props.itemCount }`}</span>
-                <CustomButton className='button'>Go to checkout</CustomButton>
+                <CustomButton 
+                    onClick={()=>{
+                        this.props.history.push('/checkout');
+                        this.props.dispatch(toggleCartHidden())
+                    }} 
+                    className='button'>
+                        Go to checkout
+                </CustomButton>
             </div>
         )
     }
@@ -36,13 +46,15 @@ class CartDropDown extends React.Component {
 
 // See redux/cart/cart.selectors.js:
 // state -> selectCartItems -> 
-const mapStateToProps = (state) => ({
-    cartItems: selectCartItems(state),
-    itemCount: selectCartItemsCount(state)
+const mapStateToProps = createStructuredSelector({
+    cartItems: selectCartItems,
+    itemCount: selectCartItemsCount
 })
 
-const mapDispatchToProps = () => {
+/* const mapDispatchToProps = () => {
     return null;
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);
+ */
+// pass match, history, location props
+// connect passes 'dispatch' to props if second arg is not included.
+export default withRouter(connect(mapStateToProps)(CartDropDown));
