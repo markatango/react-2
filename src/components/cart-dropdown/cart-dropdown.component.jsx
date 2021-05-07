@@ -20,11 +20,7 @@ class CartDropDown extends React.Component {
                 <div className='cart-items' />
                 {
                     this.props.cartItems.map(cartItem => (
-                        <div>
-
                     <CartItem key={cartItem.id} item={cartItem} />
-                    
-                    </div>
                     ))
                 }
                 <span>{`Total item count: ${ this.props.itemCount }`}</span>
@@ -41,8 +37,8 @@ const mapStateToProps = (state) => ({
     itemCount: selectCartItemsCount(state)
 })
 
-const mapDispatchToProps = () => {
+/* const mapDispatchToProps = () => {
     return null;
-}
+} */
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartDropDown);
+export default connect(mapStateToProps, null)(CartDropDown);
