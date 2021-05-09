@@ -9,7 +9,31 @@ import { toggleCartHidden } from '../../redux/cart/cart.actions';
 
 import './cart-dropdown.styles.scss';
 
-class CartDropDown extends React.Component {
+const  CartDropDown = ({itemCount, cartItems, history, dispatch }) => {
+        return(
+            <div className='cart-dropdown'>
+                <div className='cart-items' />
+                {
+                    cartItems.length ? 
+                    cartItems.map(cartItem => (  
+                        <CartItem key={cartItem.id} item={cartItem} />
+                    )) :
+                    <span className='empty-message'>Cart is empty</span>
+                }
+                <span>{`Total item count: ${ itemCount }`}</span>
+                <CustomButton 
+                    onClick={()=>{
+                        history.push('/checkout');
+                        dispatch(toggleCartHidden())
+                    }} 
+                    className='button'>
+                        Go to checkout
+                </CustomButton>
+            </div>
+        )
+    }
+
+/* class CartDropDown extends React.Component {
 
     constructor(props) {
         super(props);
@@ -41,6 +65,7 @@ class CartDropDown extends React.Component {
         )
     }
 }
+ */
 
 // See redux/cart/cart.selectors.js:
 // state -> selectCartItems -> 
@@ -49,7 +74,7 @@ const mapStateToProps = createStructuredSelector({
     itemCount: selectCartItemsCount
 })
 
-// pass match, history, location props
+// pass match, history, location to props
 // connect passes 'dispatch' to props if second arg is not included.
 export default withRouter(connect(mapStateToProps)(CartDropDown));
 
