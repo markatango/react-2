@@ -4,10 +4,8 @@ const INITIAL_STATE = {
     shopData: SHOP_DATA
 };
   
-const action = true;
-
 const shopReducer = (state = INITIAL_STATE, action) => {
-switch (action) {
+switch (action.types) {
     default:
     return state;
   }
