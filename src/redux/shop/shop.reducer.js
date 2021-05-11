@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 const shopReducer = (state = INITIAL_STATE, action) => {
 switch (action.types) {
     default:
-    return state;
+     return state;
   }
 };
 
