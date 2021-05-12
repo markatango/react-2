@@ -18,6 +18,7 @@ export const selectShopItems = createSelector(
     (shop) => shop.shopData
     );
 
+    // memoize the collectionUrlParam as it can change depending on what the user selects.
 export const selectShopItemCategory = memoize((collectionUrlParam) => createSelector(
     [selectShop], 
     (shop) => shop.shopData.find(shopDatum => shopDatum.id === COLLECTION_ID_MAP[collectionUrlParam])
