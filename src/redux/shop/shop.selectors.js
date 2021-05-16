@@ -10,7 +10,7 @@ import memoize from 'lodash.memoize';
 } */
 
 // input selector returns a piece of state
-const selectShop= state => state.shop;
+const selectShop = state => state.shop;
 
 // output selector that uses the input selector to get a piece of the store.
 export const selectCollections = createSelector(
