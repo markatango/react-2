@@ -12,7 +12,7 @@ import './cart-dropdown.styles.scss';
 const  CartDropDown = ({itemCount, cartItems, history, dispatch }) => {
         return(
             <div className='cart-dropdown'>
-                <div className='cart-items' />
+                <div className='cart-items'>
                 {
                     cartItems.length ? 
                     cartItems.map(cartItem => (  
@@ -20,6 +20,8 @@ const  CartDropDown = ({itemCount, cartItems, history, dispatch }) => {
                     )) :
                     <span className='empty-message'>Cart is empty</span>
                 }
+                </div>
+                
                 <span>{`Total item count: ${ itemCount }`}</span>
                 <CustomButton 
                     onClick={()=>{
