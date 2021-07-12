@@ -33,10 +33,10 @@ const RouteDemo =  (props) => {
     return (
         <div>
             <Switch>
-            <Route exact  path='/' component={Page1} />
-            <Route  path='/p2' component={Page2} />
-            <Route path='/p2:p2ID' component={Page2} />
-            <Route  path='/p3' component={Page3} />
+                <Route exact  path='/' component={Page1} />
+                <Route  path='/p2' component={Page2} />
+                <Route path='/p2:p2ID' component={Page2} />
+                <Route  path='/p3' component={Page3} />
             </Switch>
             
         </div>
