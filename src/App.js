@@ -8,11 +8,15 @@ import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import Contacts from './pages/contacts/contacts.component';
 //import RouteDemo from './pages/routedemo/routedemocomponent';
 import { auth, createUsersProfileDocument } from './firebase/firebase.utils.js';
+//import { auth, createUsersProfileDocument, storeShopDataIntoFirestore } from './firebase/firebase.utils.js';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutPage from './pages/checkout/checkout.component';
+
+// one time only: write SHOP_DATA  to firestore
+// import SHOP_DATA  from './redux/shop/shop.data';
 
 
 class App extends React.Component {
@@ -38,6 +42,9 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
     });
+
+    // one time only: write SHOP_DATA  to firestore
+    // storeShopDataIntoFirestore(SHOP_DATA);
   }
 
   componentWillUnmount(){
@@ -74,7 +81,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user))
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

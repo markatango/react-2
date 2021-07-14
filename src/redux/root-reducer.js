@@ -13,7 +13,7 @@ import storage from 'redux-persist/lib/storage';
 // or use sessionStorage (persists unless page is closed)
 //import sessionStorage from 'redux-persist/lib/somewhere else
 
-// persist the cart; user is persisted by firebase.
+// persist the cart; it's the reducer that changes state frequently due to user action. user is persisted by firebase.
 const persistConfig = {
     key: 'root',
     storage,

@@ -2,8 +2,6 @@ import React from 'react';
 import './directory.styles.scss';
 import'../../components/menu-item/menu-item.styles.scss';
 
-
-
 class DirectoryAlternate extends React.Component {
     constructor(props) {
         super(props);

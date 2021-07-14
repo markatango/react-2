@@ -29,5 +29,4 @@ const MenuItem = ({ title, imageUrl, match, size, history, linkUrl }) => {
 // withRouter is a HCP: It takes a component as an argument and returns a modified component.
 // in this case give mnenutiem access to routes  props in Route.
 
-
 export default withRouter(MenuItem);

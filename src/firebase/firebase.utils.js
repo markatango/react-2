@@ -23,8 +23,9 @@ const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP
     const snapShot = await userRef.get();
 
     if(!snapShot.exists){
-      const { displayName, email} = userAuth;
+      const { displayName, email } = userAuth;
       const createdAt = new Date();
+      console.log(createdAt);
 
       try {
          await userRef.set({
@@ -45,6 +46,38 @@ const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP
  */
     return userRef;
   }
+
+
+ /*  export const storeShopDataIntoFirestore = async (shop_data) => {
+    if (!shop_data) return;
+    shop_data.createdAt = new Date();
+    try { 
+      await firestore.collection("shop_data").add(shop_data);
+    } catch (error) {
+      console.log('Error creating shop data', error.message);
+    }
+    return null;
+  }; */
+
+  // write as a map function.
+  export const storeShopDataIntoFirestore =  (shop_data) => {
+    if (!shop_data) return;
+    //shop_data.createdAt = new Date();
+     console.log(Object.keys(shop_data));
+    try { 
+       Object.keys(shop_data).map((k,v) => {
+         console.log(shop_data[k])
+         
+          const { title, ...otherData } = shop_data[k];
+          firestore.collection(title).add(otherData);
+          return null;
+       })
+        
+    } catch (error) {
+      console.log('Error creating shop data', error.message); 
+    }
+    
+  };
 
 
   
