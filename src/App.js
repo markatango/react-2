@@ -6,9 +6,9 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Contacts from './pages/contacts/contacts.component';
-//import RouteDemo from './pages/routedemo/routedemocomponent';
+// import RouteDemo from './pages/routedemo/routedemocomponent';
 import { auth, createUsersProfileDocument } from './firebase/firebase.utils.js';
-//import { auth, createUsersProfileDocument, storeShopDataIntoFirestore } from './firebase/firebase.utils.js';
+// import { auth, createUsersProfileDocument, storeShopDataIntoFirestore } from './firebase/firebase.utils.js';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -17,6 +17,9 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 // one time only: write SHOP_DATA  to firestore
 // import SHOP_DATA  from './redux/shop/shop.data';
+// per course:
+// import { SelectCollectionForPreview } from './redux/shop/shop.selectors';
+
 
 
 class App extends React.Component {
@@ -28,6 +31,7 @@ class App extends React.Component {
  // by the mapDispatchToProps function, below.
   componentDidMount() {
     
+    // const { setCurrentUser } = this.props;
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -41,10 +45,13 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
+
+      // ONe time function to write to firebase
+      // storeShopDataIntoFirestore("collections", collectionsArray);
     });
 
     // one time only: write SHOP_DATA  to firestore
-    // storeShopDataIntoFirestore(SHOP_DATA);
+    
   }
 
   componentWillUnmount(){
@@ -76,8 +83,12 @@ class App extends React.Component {
   currentUser: user.currentUser
 }) */
 
+// One time function:
+// selectCollectionsForPreview is how we get the collections data
+// pass it to props then use the util function to write to firebase
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  // collectionsArray: SelectCollectionForPreview
 })
 
 const mapDispatchToProps = (dispatch) => ({

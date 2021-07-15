@@ -1,4 +1,6 @@
 import SHOP_DATA from './shop.data.js';
+// import fetchShopData from './shop.utils';
+import { ShopActionTypes } from './shop.types';
 
 const INITIAL_STATE = {
     collections: SHOP_DATA
@@ -6,6 +8,11 @@ const INITIAL_STATE = {
   
 const shopReducer = (state = INITIAL_STATE, action) => {
 switch (action.types) {
+    case ShopActionTypes.GET_SHOP_DATA:
+      return {
+        ...state,
+        collections: SHOP_DATA
+      };
     default:
      return state;
   }

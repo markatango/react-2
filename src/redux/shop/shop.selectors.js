@@ -19,7 +19,7 @@ export const selectCollections = createSelector(
     );
 
     // memoize the collectionUrlParam as it can change depending on what the user selects.
-export const selectCollection= memoize((collectionUrlParam) => createSelector(
+export const selectCollection = memoize((collectionUrlParam) => createSelector(
     [selectCollections], 
     (collections) => collections[collectionUrlParam]
     )); 
