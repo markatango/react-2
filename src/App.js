@@ -48,10 +48,8 @@ class App extends React.Component {
 
       // ONe time function to write to firebase
       // storeShopDataIntoFirestore("collections", collectionsArray);
+      // storeShopDataIntoFirestore("collections", collectionsArray.map(({title, items}) => {title,items}));
     });
-
-    // one time only: write SHOP_DATA  to firestore
-    
   }
 
   componentWillUnmount(){

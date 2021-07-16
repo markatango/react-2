@@ -4,8 +4,7 @@ import MenuItem from '../../components/menu-item/menu-item.component';
 import { connect } from 'react-redux';
 import { selectDirectoryItems } from '../../redux/directory/directory.selectors';
 import { createStructuredSelector } from 'reselect';
-// used by alternate ways of storing SHOP_DATA into firebase;
-// import { fetchShopData } from '../../redux/shop/shop.actions';
+
 class Directory extends React.Component {
 
   /* componentDidMount(props){

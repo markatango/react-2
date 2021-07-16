@@ -47,9 +47,27 @@ const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP
     return userRef;
   }
 
+export const convertCollectionsSnapshotToMap = (collections) => {
+    const transformedCollection = collections.docs.map(doc => {
+      const { title, items } = doc.data();
+
+      return {
+        routeName: encodeURI(title.toLowerCase()),
+        id: doc.id,
+        title,
+        items
+      }
+    })
+
+    return transformedCollection.reduce( (accum, collection) => {
+      accum[collection.title.toLowerCase()] = collection;
+      return accum;
+    }, {})
+  }
+
   export const fetchShopData = async () => {
     
-    const shopDataLocator = '/shop_data/V4EUml4XRemeKYCCWqYO';
+    const shopDataLocator = '/collections/FyGxMicpW84PPdNzidik';
     const shopRef = firestore.doc(shopDataLocator);
     const snapShot = await shopRef.get();
 
