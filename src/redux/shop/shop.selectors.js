@@ -21,9 +21,14 @@ export const selectCollections = createSelector(
     // memoize the collectionUrlParam as it can change depending on what the user selects.
 export const selectCollection = memoize((collectionUrlParam) => createSelector(
     [selectCollections], 
-    (collections) => collections[collectionUrlParam]
+    (collections) => collections ? collections[collectionUrlParam] : null
     )); 
+
+    // fix for removing static shop data from this reducer. Was:
+    // collections => Object.keys(collections).map(key => collections[key]))
+    // now returns an empty array instead of an empty object (see
+    // initialization, above)
 
 export const SelectCollectionForPreview = createSelector(
     [selectCollections],
-    collections => Object.keys(collections).map(key => collections[key]))
+        collections => collections ? Object.keys(collections).map(key => collections[key]) : []) 
