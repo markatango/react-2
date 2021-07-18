@@ -37,7 +37,7 @@ class  ShopPage extends React.Component {
         }
     }
 
-    // or without constructor  per later versions of Reacet
+    // or without constructor  per later versions of React
     // state = {
     //     loading: true
     // }
@@ -48,11 +48,11 @@ class  ShopPage extends React.Component {
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
         this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
-           // console.log(snapShot);
+            console.log(snapShot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
             console.log(`Received from firestore: ${collectionsMap}`);
             updateCollections(collectionsMap);
-            await this.setState({loading:false});
+            this.setState({loading:false});
         })
     }
     
