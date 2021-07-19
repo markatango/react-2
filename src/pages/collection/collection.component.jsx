@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-//import { Route } from 'react-router-com';
 import { selectCollection } from '../../redux/shop/shop.selectors';
 import CollectionItem from '../../components/collection-item/collection-item.component'
 
@@ -22,9 +21,14 @@ const CollectionPage = ({ collection }) => {
 
 // own props gets props from CollectionPage, including match 
 // since CollectionPage is wraped in a Route comonent on Shop page
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state, ownProps) =>{ 
+    
+    console.log("ownProps");
+    console.log(ownProps);
+    return ({
     collection: selectCollection(ownProps.match.params.collectionId)(state)
-})
+    })
+}
 
 export default connect(mapStateToProps)(CollectionPage);
 

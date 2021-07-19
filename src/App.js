@@ -5,15 +5,14 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
-import Contacts from './pages/contacts/contacts.component';
+// import Contacts from './pages/contacts/contacts.component';
 //import RouteDemo from './pages/routedemo/routedemocomponent';
 import { auth, createUsersProfileDocument } from './firebase/firebase.utils.js';
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
-import CheckoutPage from './pages/checkout/checkout.component';
-
+import CheckoutPage from './pages/checkout/checkout.component'
 
 class App extends React.Component {
   
@@ -43,18 +42,27 @@ class App extends React.Component {
   componentWillUnmount(){
     this.unsubscribeFromAuth();
   }
-  
+ /* <Route exact path='/shop/:collectionId' component={ CollectionPage } />*/
   // render param executes javascript
   render() {
     return (
       <div>
         <Header />
         <Switch>
-          <Route exact path='/' component={ HomePage } />
-          <Route path='/shop' component={ ShopPage } />
-          <Route exact path='/signinandsignup' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
-          <Route path='/contacts' component={ Contacts} />
-          <Route exact path = '/checkout' component={ CheckoutPage } />
+        <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route
+            exact
+            path='/signinandsignup'
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to='/' />
+              ) : (
+                <SignInAndSignUp />
+              )
+            }
+          />
         </Switch>
       </div>
     );
