@@ -7,7 +7,7 @@ import './menu-item.styles.scss';
 // esp. history.push property to <route> elements on main app.
 
 const MenuItem = ({ title, imageUrl, match, size, history, linkUrl }) => {
-    //console.log(`${match.url} ${linkUrl}`)
+    console.log(`${match.url} ${linkUrl}`)
      // console.log(history)
      // console.log(match);
     // console.log(linkUrl)
