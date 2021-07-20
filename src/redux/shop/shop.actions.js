@@ -1,5 +1,5 @@
-import fetchShopData from '../../firebase/firebase.utils';
-export const getShopData = () => ({
-    type: UserActionTypes.SET_CURRENT_USER,
-    payload: fetchShopData()
+import { ShopActionTypes } from './shop.types';
+export const getShopData = (collectionsMap) => ({
+    type: ShopActionTypes.GET_SHOP_DATA,
+    payload: collectionsMap
 });

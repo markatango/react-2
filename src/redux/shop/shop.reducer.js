@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 };
   
 const shopReducer = (state = INITIAL_STATE, action) => {
-switch (action.types) {
+switch (action.type) {
     case ShopActionTypes.GET_SHOP_DATA:
       return {
         ...state,

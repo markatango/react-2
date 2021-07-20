@@ -6,7 +6,7 @@ import CollectionPage from '../collection/collection.component';
 import { Route } from 'react-router-dom';
 import './shop.styles.scss';
 
-import { fetchShopData } from '../../redux/shop/shop.actions';
+import { getShopData } from '../../redux/shop/shop.actions';
 import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
 
@@ -51,6 +51,7 @@ class  ShopPage extends React.Component {
             console.log(snapShot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
             console.log(`Received from firestore: ${collectionsMap}`);
+            console.log(collectionsMap);
             updateCollections(collectionsMap);
             this.setState({loading:false});
         })
@@ -58,7 +59,7 @@ class  ShopPage extends React.Component {
     
     render(){
         const { match } = this.props;
-        //console.log(match);
+        console.log(match);
         const { loading } = this.state;
         return ( 
             <div className='shop-page'>
@@ -69,7 +70,7 @@ class  ShopPage extends React.Component {
                     exact path={`${match.path}`} 
                     render={(props) => <CollectionsOverviewWithSpinner isLoading={loading} {...props} />} />
                 <Route 
-                    path={ `${match.path}/:collectionId`} 
+                    exact path={ `${match.path}/:collectionId`} 
                     render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} /> 
             </div>
         )
@@ -77,7 +78,7 @@ class  ShopPage extends React.Component {
 };
 
 const mapDispatchToProps = dispatch => ({
-    updateCollections : (collectionsMap) => dispatch(fetchShopData(collectionsMap))
+    updateCollections : (collectionsMap) => dispatch(getShopData(collectionsMap))
 });
 
 export default connect(null, mapDispatchToProps)(ShopPage);
