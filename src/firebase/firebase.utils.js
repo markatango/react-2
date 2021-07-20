@@ -65,7 +65,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     }, {})
   }
 
-  export const fetchShopData = async () => {
+  /* export const fetchShopData = async () => {
     
     const shopDataLocator = '/collections/FyGxMicpW84PPdNzidik';
     const shopRef = firestore.doc(shopDataLocator);
@@ -79,7 +79,7 @@ export const convertCollectionsSnapshotToMap = (collections) => {
     const shop_data = snapShot.data()
     console.log(shop_data);
     return shop_data;
-  }
+  } */
 
 
   /* export const storeShopDataIntoFirestore = async (shop_data) => {
