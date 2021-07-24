@@ -34,6 +34,10 @@ class App extends React.Component {
     // const { setCurrentUser } = this.props;
     const { setCurrentUser } = this.props;
 
+    //attach a 'next function to the listener (onAuthStat...) that subscribes to the observable sequence of auth events
+    // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
+
+    // this code uses proprietary firebase functions
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log("userAuth", userAuth)
       if(userAuth) {

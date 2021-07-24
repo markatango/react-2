@@ -44,10 +44,32 @@ class  ShopPage extends React.Component {
         
     unsubscribeFromSnapshot = null;
 
-    componentDidMount(){
+    //attach a 'next' function to the listener (onSnapshot...) that subscribes to the observable sequence of auth events
+    // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
+
+    // this code uses proprietary firebase functions
+
+    /* componentDidMount(){
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
         this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
+            console.log(snapShot);
+            const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
+            console.log(`Received from firestore: ${collectionsMap}`);
+            console.log(collectionsMap);
+            updateCollections(collectionsMap);
+            this.setState({loading:false});
+        })
+    } */
+
+    // this code uses promises
+
+    componentDidMount(){
+        const { updateCollections } = this.props;
+        const collectionRef = firestore.collection('collections');
+
+        // get() returns a promise
+        collectionRef.get().then(snapShot => {
             console.log(snapShot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
             console.log(`Received from firestore: ${collectionsMap}`);
