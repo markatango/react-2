@@ -42,42 +42,86 @@ class  ShopPage extends React.Component {
     //     loading: true
     // }
         
+    // =====================================================
+    // Morphing from synchronous to asynchronous access via thunk
+    // =====================================================
+
     unsubscribeFromSnapshot = null;
 
     //attach a 'next' function to the listener (onSnapshot...) that subscribes to the observable sequence of auth events
     // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
 
     // this code uses proprietary firebase functions
+    //----------------------------------------------
 
     /* componentDidMount(){
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
         this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapShot => {
-            console.log(snapShot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
-            console.log(`Received from firestore: ${collectionsMap}`);
-            console.log(collectionsMap);
             updateCollections(collectionsMap);
             this.setState({loading:false});
         })
     } */
 
     // this code uses promises
+    //----------------------------------------------
 
     componentDidMount(){
         const { updateCollections } = this.props;
         const collectionRef = firestore.collection('collections');
-
         // get() returns a promise
         collectionRef.get().then(snapShot => {
-            console.log(snapShot);
             const collectionsMap = convertCollectionsSnapshotToMap(snapShot);
-            console.log(`Received from firestore: ${collectionsMap}`);
-            console.log(collectionsMap);
             updateCollections(collectionsMap);
             this.setState({loading:false});
         })
     }
+
+    //  test the native fetch() command
+    //----------------------------------------------
+
+    /* componentDidMount(){
+        const { updateCollections } = this.props;
+        const collectionRef = firestore.collection('collections');
+
+        fetch('https://firestore.googleapis.com/v1/projects/node-react-dev-308922/databases/(default)/documents/collections')
+        .then(response => response.json())
+        .then(collections => console.log(collections));
+    } */
+            /*    This is what you get *Gak!*
+                {documents: Array(5)}
+            documents: Array(5)
+            0:
+            createTime: "2021-07-15T22:38:18.049826Z"
+            fields:
+            id:
+            integerValue: "2"
+            __proto__: Object
+            items:
+            arrayValue:
+            values: Array(8)
+            0:
+            mapValue:
+            fields:
+            id: {integerValue: "10"}
+            imageUrl: {stringValue: "https://i.ibb.co/0s3pdnc/adidas-nmd.png"}
+            name: {stringValue: "Adidas NMD"}
+            price: {integerValue: "220"}
+            __proto__: Object
+            __proto__: Object
+            __proto__: Object
+            1: {mapValue: {…}}
+            2: {mapValue: {…}}
+            3: {mapValue: {…}}
+            4: {mapValue: {…}}
+            5: {mapValue: {…}}
+            6: {mapValue: {…}}
+            7: {mapValue: {…}}
+            length: 8
+            __proto__: Array(0)
+            __proto__: Object
+            __proto__: Object */
     
     render(){
         const { match } = this.props;
