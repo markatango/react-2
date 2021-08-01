@@ -1,5 +1,5 @@
 import { ShopActionTypes } from './shop.types';
-import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
+//import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
 export const fetchCollectionsSuccess = (collectionsMap) => ({
     type: ShopActionTypes.FETCH_COLLECTIONS_SUCCESS,
@@ -15,7 +15,7 @@ export const fetchCollectionsStart = () => ({
     type: ShopActionTypes.FETCH_COLLECTIONS_START
 });
 
-export const fetchCollectionsStartAsync = () => {
+/* export const fetchCollectionsStartAsync = () => {
     return dispatch => {
         const collectionRef = firestore.collection('collections');
         dispatch(fetchCollectionsStart()); // set the isFetching bit
@@ -28,5 +28,5 @@ export const fetchCollectionsStartAsync = () => {
         .catch(error => dispatch(fetchCollectionsFailure(error))); // reset isFetching and populate collections
     }
 };
-
+ */
 

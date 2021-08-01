@@ -7,7 +7,7 @@ import CollectionsOverview from './collections-overview.component';
 import {compose} from 'redux';
 
 const mapStateToProps = createStructuredSelector({
-    isCollectionFetching : selectIsCollectionFetching
+    isLoading : selectIsCollectionFetching
 })
 
 //const CollectionsContainer = connect(mapStateToProps)(CollectionsOverview);
