@@ -6,6 +6,7 @@ import rootReducer from './root-reducer';
 
 // put sagas here
 import { fetchCollectionStart } from './shop/shop.sagas';
+import rootSaga from './root-saga';
 // =================
 
 const sagaMiddleWare = createSagaMiddleware();
@@ -17,7 +18,7 @@ middlewares.push(logger)
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 // run sagas here
-sagaMiddleWare.run(fetchCollectionStart);
+sagaMiddleWare.run(rootSaga);
 
 // =====================
 

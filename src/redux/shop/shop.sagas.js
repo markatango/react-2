@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 import { ShopActionTypes } from './shop.types';
 
@@ -18,6 +18,7 @@ export function* fetchCollectionsAsync(){
         yield put(fetchCollectionsFailure(errorMessage))
     }
     
+    // Promise pattern, redux
     /* // get() returns a promise
     collectionRef.get()
     .then(snapShot => {
@@ -35,7 +36,7 @@ export function* fetchCollectionsAsync(){
 // and cancels an earlier saga if it didn't complete yet.
 // arbitrated by saga middleware
 export function* fetchCollectionStart(){
-    yield takeEvery(
+    yield takeLatest(
         ShopActionTypes.FETCH_COLLECTIONS_START,
         fetchCollectionsAsync
     )
