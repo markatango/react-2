@@ -7,13 +7,13 @@ import Header from './components/header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import Contacts from './pages/contacts/contacts.component';
 // import RouteDemo from './pages/routedemo/routedemocomponent';
-import { auth, createUsersProfileDocument } from './firebase/firebase.utils.js';
-// import { auth, createUsersProfileDocument, storeShopDataIntoFirestore } from './firebase/firebase.utils.js';
+
 import { connect } from 'react-redux';
-import { setCurrentUser } from './redux/user/user.actions';
+
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 import CheckoutPage from './pages/checkout/checkout.component';
+import { checkUserSession } from './redux/user/user.actions';
 
 // one time only: write SHOP_DATA  to firestore
 // import SHOP_DATA  from './redux/shop/shop.data';
@@ -31,8 +31,9 @@ class App extends React.Component {
  // by the mapDispatchToProps function, below.
   componentDidMount() {
     
-    // const { setCurrentUser } = this.props;
-    const { setCurrentUser } = this.props;
+
+    const { checkUserSession } = this.props;
+    checkUserSession()
 
     //attach a 'next function to the listener (onAuthStat...) that subscribes to the observable sequence of auth events
     // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
@@ -93,8 +94,8 @@ const mapStateToProps = createStructuredSelector({
   // collectionsArray: SelectCollectionForPreview
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
-});
+const mapDispatchToProps = dispatch =>({
+  checkUserSession: () => dispatch(checkUserSession())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

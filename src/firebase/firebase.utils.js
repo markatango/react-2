@@ -16,6 +16,17 @@ const { REACT_APP_FIREBASE_APIKEY, REACT_APP_FIREBASE_MESSAGESENDERID, REACT_APP
 
   firebase.initializeApp(config);
 
+  export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = auth.onAuthStateChanged(userAuth => {
+        unsubscribe();
+        resolve(userAuth);
+      }, 
+      reject
+     )
+    })
+  }
+
   export const createUsersProfileDocument = async (userAuth, additionalData) => {
     if (!userAuth) return;
 
