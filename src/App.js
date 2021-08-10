@@ -37,8 +37,8 @@ class App extends React.Component {
     //attach a 'next function to the listener (onAuthStat...) that subscribes to the observable sequence of auth events
     // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
 
-    // this code uses proprietary firebase functions
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    // this code uses proprietary firebase functions; implement as promise pattern in user.sagas
+    /* this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       console.log("userAuth", userAuth)
       if(userAuth) {
         const userRef = await createUsersProfileDocument(userAuth);
@@ -48,12 +48,12 @@ class App extends React.Component {
           });
         });
       }
-      setCurrentUser(userAuth);
+      setCurrentUser(userAuth); */
 
       // ONe time function to write to firebase
       // storeShopDataIntoFirestore("collections", collectionsArray);
       // storeShopDataIntoFirestore("collections", collectionsArray.map(({title, items}) => {title,items}));
-    });
+   // });
   }
 
   componentWillUnmount(){

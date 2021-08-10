@@ -129,10 +129,21 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   export const firestore = firebase.firestore();
 
 // Google
-  const provider = new firebase.auth.GoogleAuthProvider();
+  // for non-saga implementation...
+  /* const provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account'});
-  export const signInWithGoogle = () => auth.signInWithPopup(provider);
+  export const signInWithGoogle = () => auth.signInWithPopup(provider); 
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: 'select_account'});
+  export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);
+*/
 
+  // for saga implementation... import in user.sagas
+  export const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: 'select_account'});
+
+// for non-saga implementation...
+  
   // for whole library
   export default firebase;
 

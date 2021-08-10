@@ -5,7 +5,6 @@ import { persistStore } from 'redux-persist';
 import rootReducer from './root-reducer';
 
 // put sagas here
-import { fetchCollectionStart } from './shop/shop.sagas';
 import rootSaga from './root-saga';
 // =================
 
