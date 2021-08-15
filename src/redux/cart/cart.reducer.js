@@ -31,6 +31,11 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       ...state,
       cartItems: delItemFromCart(state.cartItems, action.payload)
     };
+    case CartActionTypes.EMPTY_CART:
+    return {
+      ...state,
+      cartItems: []
+    };
     default:
       return state;
   }

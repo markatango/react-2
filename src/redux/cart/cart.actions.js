@@ -18,3 +18,7 @@ export const delItem = item => ({
   type: CartActionTypes.DEL_ITEM,
   payload: item
 });
+
+export const emptyCart = item => ({
+  type: CartActionTypes.EMPTY_CART
+});

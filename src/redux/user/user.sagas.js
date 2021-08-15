@@ -2,6 +2,7 @@ import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { UserActionTypes } from './user.types';
 import { auth, googleProvider, createUsersProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure } from './user.actions';
+import { emptyCart } from '../cart/cart.actions';
 
 export function* getSnapshotFromUserAuth(userAuth){
     try{
@@ -60,6 +61,7 @@ export function* signOutUser(){
     try{
         yield auth.signOut()
         yield put(signOutSuccess())
+        yield put(emptyCart())
         } catch (error) {
             yield put(signOutFailure(error))
         }
