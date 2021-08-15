@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './App.css';
 import HomePage from './pages/homepage/homepage.component';
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -22,73 +22,34 @@ import { checkUserSession } from './redux/user/user.actions';
 
 
 
-class App extends React.Component {
-  
-  unsubscribeFromAuth = null
+const App = ({ checkUserSession, currentUser }) => {
 
- //confirm authentication through 'open subscription' service from firebase
- // user action 'setCurrentUser' is dispatched from user.actions to props for this component
- // by the mapDispatchToProps function, below.
-  componentDidMount() {
-    
-
-    const { checkUserSession } = this.props;
+  useEffect(() => {
     checkUserSession()
+  },[checkUserSession])
 
-    //attach a 'next function to the listener (onAuthStat...) that subscribes to the observable sequence of auth events
-    // assign the function returned to unsubscribe... so the listenter can unsubxribe when the component unmounts
 
-    // this code uses proprietary firebase functions; implement as promise pattern in user.sagas
-    /* this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-      console.log("userAuth", userAuth)
-      if(userAuth) {
-        const userRef = await createUsersProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            currentUser: {id: snapShot.id, ...snapShot.data() }
-          });
-        });
-      }
-      setCurrentUser(userAuth); */
-
-      // ONe time function to write to firebase
-      // storeShopDataIntoFirestore("collections", collectionsArray);
-      // storeShopDataIntoFirestore("collections", collectionsArray.map(({title, items}) => {title,items}));
-   // });
-  }
-
-  componentWillUnmount(){
-    this.unsubscribeFromAuth();
-  }
+  /* componentWillUnmount(){
+    unsubscribeFromAuth();
+  } */
   
   // render param executes javascript
-  render() {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={ HomePage } />
-          <Route path='/shop' component={ ShopPage } />
-          <Route exact path='/signinandsignup' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
-          <Route path='/contacts' component={ Contacts} />
-          <Route exact path = '/checkout' component={ CheckoutPage } />
-        </Switch>
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={ HomePage } />
+        <Route path='/shop' component={ ShopPage } />
+        <Route exact path='/signinandsignup' render={() => currentUser ? (<Redirect to='/' />) : (<SignInAndSignUp />)} />
+        <Route path='/contacts' component={ Contacts} />
+        <Route exact path = '/checkout' component={ CheckoutPage } />
+      </Switch>
+    </div>
+  );
 }
 
-//<Route exact path='/signinandsignup' component={ SignInAndSignUp }/>
 
-// render renders from JavaScript; component renders from component
-
-/* const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
-}) */
-
-// One time function:
-// selectCollectionsForPreview is how we get the collections data
-// pass it to props then use the util function to write to firebase
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
   // collectionsArray: SelectCollectionForPreview
