@@ -1,7 +1,7 @@
 import { takeLatest, put, all, call } from 'redux-saga/effects';
 import { UserActionTypes } from './user.types';
 import { auth, googleProvider, createUsersProfileDocument, getCurrentUser } from '../../firebase/firebase.utils';
-import { signInSuccess, signInFailure, signOutSuccess, signOutFailure } from './user.actions';
+import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure } from './user.actions';
 import { emptyCart } from '../cart/cart.actions';
 
 export function* getSnapshotFromUserAuth(userAuth){
@@ -67,8 +67,22 @@ export function* signOutUser(){
         }
 }
 
+export function* signUpUser({payload: {email, password, displayName}}){
+    try { 
+        const { user } =  yield auth.createUserWithEmailAndPassword(email, password);
+        yield createUsersProfileDocument(user);
+        yield put(signUpSuccess(user, displayName))
+    } catch(error) {
+        yield put(signUpFailure(error));
+    }
+}
+
 export function* onSignOutUser() {
     yield takeLatest(UserActionTypes.SIGN_OUT_START, signOutUser);
+}
+
+export function* onSignUpUser() {
+    yield takeLatest(UserActionTypes.SIGN_UP_START, signUpUser)
 }
 
 export function* userSagas() {
@@ -76,7 +90,8 @@ export function* userSagas() {
         call(onGoogleSignInStart),
         call(onEmailSignInStart),
         call(onCheckUserSession),
-        call(onSignOutUser)
+        call(onSignOutUser),
+        call(onSignUpUser)
     ])
 }
 
